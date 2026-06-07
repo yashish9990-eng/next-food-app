@@ -1,7 +1,15 @@
+// 'use client';
+
 import classes from './page.module.css';
 import ImagePicker from '@/components/meals/image-picker';
+import { shareMeal } from '@/lib/action';
+import MealsFormSubmit from '@/components/meals/meals-form-submit';
+// import {  useFormStatus } from 'react-dom';
 
 export default function ShareMealPage() {
+  // const status=useFormStatus();
+  // console.log(status.pending);
+   
   return (
     <>
       <header className={classes.header}>
@@ -11,7 +19,7 @@ export default function ShareMealPage() {
         <p>Or any other meal you feel needs sharing!</p>
       </header>
       <main className={classes.main}>
-        <form className={classes.form}>
+        <form className={classes.form} action={shareMeal}>
           <div className={classes.row}>
             <p>
               <label htmlFor="name">Your name</label>
@@ -41,7 +49,7 @@ export default function ShareMealPage() {
           </p>
            <ImagePicker label="Pick an image for your meal" name="image" />
           <p className={classes.actions}>
-            <button type="submit">Share Meal</button>
+            <MealsFormSubmit />
           </p>
         </form>
       </main>
