@@ -2,14 +2,24 @@
 
 import classes from "./page.module.css";
 import ImagePicker from "@/components/meals/image-picker";
-import { shareMeal } from "@/lib/action";
+import { shareMealState } from "@/lib/action";
 import MealsFormSubmit from "@/components/meals/meals-form-submit";
 import { useFormState } from "react-dom";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function ShareMealPage() {
-  const [state, formAction] = useFormState(shareMeal, {
+  const router = useRouter();
+  const [state, formAction] = useFormState(shareMealState, {
     message: null,
   });
+
+  useEffect(() => {
+    if (state?.redirect) {
+      router.push(state.redirect);
+    }
+  }, [state, router]);
+
   return (
     <>
       <header className={classes.header}>

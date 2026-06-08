@@ -47,7 +47,7 @@ export default function ImagePicker({ label, name }) {
           type="file"
           id={name}
           name={name}
-          accept="image/png, image/jpeg"
+          accept="image/png, image/jpeg, image/jpg, image/svg, image/svg+xml"
           ref={imageInputRef}
           onChange={handleImageChange}
           required

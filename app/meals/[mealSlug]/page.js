@@ -4,6 +4,26 @@ import Image from "next/image";
 import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
 
+export async function generateMetadata({ params }) {
+  const meal = await getMeal(params.mealSlug);
+
+  if(!meal) {
+    return notFound();
+  }
+
+  if (meal) {
+    return {
+      title: meal.title,
+      description: meal.summary,
+    };
+  }
+}
+
+// export const metadata = {
+//   title: "All Meals",
+//   description: "Browse the delicious meals shared by our vibrant community.",
+// };
+
 export default async function MealsDetailsPage({ params }) {
   const meal = await getMeal(params.mealSlug);
   if(!meal) {
@@ -11,7 +31,7 @@ export default async function MealsDetailsPage({ params }) {
   }
   meal.instructions = meal.instructions.replace(/\n/g, "<br />");
 
-  console.log('meal.........:', meal);
+  // console.log('meal.........:', meal);
 
   return (
     <>
